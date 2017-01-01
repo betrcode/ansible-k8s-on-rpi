@@ -1,0 +1,16 @@
+---
+
+- name: Checking service
+  debug:
+    msg: "Checking {{ service_name }}"
+
+- name: Register service status
+  command: "systemctl status {{ service_name }}"
+  ignore_errors: yes
+  changed_when: false
+  register: service_status
+
+- name: Assert service status
+  assert:
+    that:
+      - service_status.rc == 0

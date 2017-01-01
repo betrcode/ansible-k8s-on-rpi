@@ -16,9 +16,23 @@
   unarchive:
     src: "{{ k8s.destination_filename }}"
     dest: "./"
-    remote_src: yes
+    copy: no
+  tags:
+    - unzip
 
 - name: Install Kubernetes master
   command: "./k8s-on-rpi-master/install-k8s-master.sh"
+  tags:
+    - install
 
-# TODO: Add checks/validations that things are up and running
+- name: Check docker-bootstrap.service is running
+  include: check-service.yml
+  vars:
+    service_name: "{{ item }}"
+  with_items:
+    - "docker-bootstrap.service"
+    - "k8s-etcd.service"
+    - "k8s-flannel.service"
+    - "docker.service"
+    - "k8s-master.service"
+  tags: check
