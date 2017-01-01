@@ -8,3 +8,7 @@
     - name: Set hostname as defined in inventory
       hostname:
         name: "{{ inventory_hostname }}"
+    - name: Setup hosts file
+      template:
+        src: hosts
+        dest: /etc/hosts
