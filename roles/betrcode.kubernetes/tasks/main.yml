@@ -12,33 +12,5 @@
     update_cache: yes
   with_items: "{{ k8s.tools }}"
 
-- name: Unzip the k8s-on-rpi archive
-  unarchive:
-    src: "{{ k8s.destination_filename }}"
-    dest: "./"
-    copy: no
-  tags:
-    - unzip
-
-- name: Symlink mkdir command
-  file:
-    src: /bin/mkdir
-    dest: /usr/bin/mkdir
-    state: link
-
-- name: Install Kubernetes master
-  command: "./k8s-on-rpi-master/install-k8s-master.sh"
-  tags:
-    - install
-
-- name: Check docker-bootstrap.service is running
-  include: check-service.yml
-  vars:
-    service_name: "{{ item }}"
-  with_items:
-    - "docker-bootstrap.service"
-    - "k8s-etcd.service"
-    - "k8s-flannel.service"
-    - "docker.service"
-    - "k8s-master.service"
-  tags: check
+- name: Install Kubernetes
+  include: install-kubernetes-using-kubeadm.yml
