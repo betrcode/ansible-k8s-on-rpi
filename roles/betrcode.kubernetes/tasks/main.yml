@@ -20,6 +20,12 @@
   tags:
     - unzip
 
+- name: Symlink mkdir command
+  file:
+    src: /bin/mkdir
+    dest: /usr/bin/mkdir
+    state: link
+
 - name: Install Kubernetes master
   command: "./k8s-on-rpi-master/install-k8s-master.sh"
   tags:
