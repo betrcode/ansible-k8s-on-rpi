@@ -1,0 +1,4 @@
+---
+
+ansible_ssh_user: pirate
+ansible_ssh_pass: "{{ lookup('env','ANSIBLE_SSH_PASS') }}"

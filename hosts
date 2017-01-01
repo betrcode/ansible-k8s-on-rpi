@@ -1,2 +1,8 @@
 [kubernetes-master]
-# TODO: Add master node
+pi1
+
+[nodes]
+pi2
+pi3
+pi4
+pi5
