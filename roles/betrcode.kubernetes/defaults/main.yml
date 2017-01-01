@@ -5,3 +5,4 @@ k8s:
   destination_filename: 'k8s-on-rpi.zip'
   tools:
     - unzip
+    - bridge-utils
