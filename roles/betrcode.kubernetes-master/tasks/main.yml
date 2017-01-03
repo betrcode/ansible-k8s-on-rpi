@@ -1,0 +1,9 @@
+---
+
+- name: Init k8s master
+  shell: "kubeadm init"
+  register: kubeadm_init_result
+
+- name: Output result
+  debug:
+    var: kubeadm_init_result

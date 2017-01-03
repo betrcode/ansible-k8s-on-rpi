@@ -1,5 +1,8 @@
 ---
 
+# The intent of this task file is to install a k8s as described in
+# http://kubernetes.io/docs/getting-started-guides/kubeadm/
+
 - apt_key:
     url: "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
     state: present
@@ -7,6 +10,8 @@
 - apt_repository:
     repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
     state: present
+  environment:
+    ARCH: arm
 
 - name: Install Kubernetes items
   apt:
@@ -14,8 +19,8 @@
     state: latest
     update_cache: yes
   with_items:
-    - "docker.io"
-    - "kubelet"
-    - "kubeadm"
-    - "kubectl"
+    - "docker.io"       # the container runtime, which Kubernetes depends on. v1.11.2 is recommended, but v1.10.3 and v1.12.1 are known to work as well
+    - "kubelet"         # the most core component of Kubernetes. It runs on all of the machines in your cluster and does things like starting pods and containers.
+    - "kubeadm"         # the command to control the cluster once it’s running. You will only need this on the master, but it can be useful to have on the other nodes as well.
+    - "kubectl"         # the command to bootstrap the cluster
     - "kubernetes-cni"

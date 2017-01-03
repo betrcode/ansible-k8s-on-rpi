@@ -1,0 +1,13 @@
+---
+
+- name: Install Kubernetes
+  hosts: pis
+  become: yes
+  roles:
+    - betrcode.kubernetes
+
+- name: Initialize master
+  hosts: kubernetes-master
+  become: yes
+  roles:
+    - betrcode.kubernetes-master

@@ -1,7 +1,0 @@
----
-
-- name: Install Kubernetes master
-  hosts: kubernetes-master
-  become: yes
-  roles:
-    - betrcode.kubernetes

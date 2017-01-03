@@ -1,9 +1,10 @@
 # ansible-k8s-on-rpi
-Installs Kubernetes on Raspberry Pi using Ansible
+Installs Kubernetes on Raspberry Pi cluster using Ansible
 
-## How to install Kubernetes master 
+## How to install Kubernetes 
 * Make sure the intended host for Kubernetes master is in the `hosts` file under the `kubernetes-master` group.
-* Run `ansible-playbook install-kubernetes-master.yml -i hosts`
+* Make sure the intended hosts for Kubernetes cluster nodes is in the `hosts` file under the `nodes` group.
+* Run `ansible-playbook install-kubernetes.yml -i hosts`
 * Profit
 
 ## References

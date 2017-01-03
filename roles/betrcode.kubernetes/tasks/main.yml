@@ -1,16 +1,12 @@
 ---
 
-- name: Download k8s-on-rpi
-  get_url:
-    url: "{{ k8s.archive_url }}"
-    dest: "./{{ k8s.destination_filename }}"
-
 - name: Install tools
   apt:
     pkg: "{{ item }}"
     state: latest
     update_cache: yes
-  with_items: "{{ k8s.tools }}"
+  with_items:
+    - bridge-utils
 
 - name: Install Kubernetes
   include: install-kubernetes-using-kubeadm.yml

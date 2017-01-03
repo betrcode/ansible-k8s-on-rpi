@@ -1,8 +1,1 @@
 ---
-
-k8s:
-  archive_url: 'https://github.com/awassink/k8s-on-rpi/archive/master.zip'
-  destination_filename: 'k8s-on-rpi.zip'
-  tools:
-    - unzip
-    - bridge-utils
