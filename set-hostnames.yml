@@ -12,3 +12,7 @@
       template:
         src: hosts
         dest: /etc/hosts
+    - name: Restart Avahi daemon # so that DNS server gets new hostname
+      service:
+        name: avahi-daemon
+        state: restarted
