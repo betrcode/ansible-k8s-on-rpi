@@ -1,7 +1,7 @@
 ---
 
 - name: Set hostname
-  hosts: all
+  hosts: pis
   become: yes
 
   tasks:

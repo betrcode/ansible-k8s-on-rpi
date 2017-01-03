@@ -1,3 +1,9 @@
+localhost ansible_connection=local
+
+[pis:children]
+kubernetes-master
+nodes
+
 [kubernetes-master]
 pi1
 
@@ -6,3 +12,4 @@ pi2
 pi3
 pi4
 pi5
+
