@@ -9,21 +9,3 @@
       command: shutdown -h now
       async: 60 # let it run for max 60s
       poll: 0   # fire and forget
-
-- name: Verify hosts are shutdown
-  hosts: localhost
-
-  tasks:
-    - name: Ping until host is down
-      command: "ping -c 1 {{ item }}"
-      failed_when: False
-      register: ping_result
-      until: ping_result.rc != 0
-      retries: 20
-      delay: 3
-      with_items: "{{ groups['pis'] }}"
-      tags:
-        - ping
-        - wip
-
-
