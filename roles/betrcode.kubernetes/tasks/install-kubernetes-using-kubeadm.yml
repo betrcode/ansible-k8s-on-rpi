@@ -19,7 +19,8 @@
     state: latest
     update_cache: yes
   with_items:
-    - "docker.io"       # the container runtime, which Kubernetes depends on. v1.11.2 is recommended, but v1.10.3 and v1.12.1 are known to work as well
+    # Not installing Docker runtime since it is already pre-installed in the Hypriot OS image. Re-enable if we switch to Raspbian.
+    #- "docker.io"       # the container runtime, which Kubernetes depends on. v1.11.2 is recommended, but v1.10.3 and v1.12.1 are known to work as well
     - "kubelet"         # the most core component of Kubernetes. It runs on all of the machines in your cluster and does things like starting pods and containers.
     - "kubeadm"         # the command to control the cluster once it’s running. You will only need this on the master, but it can be useful to have on the other nodes as well.
     - "kubectl"         # the command to bootstrap the cluster
