@@ -1,0 +1,13 @@
+---
+
+- name: Run busybox httpd
+  hosts: all
+  become: yes
+  tasks:
+    - name: Run busybox httpd container
+      docker_container:
+        name: busybox
+        image: hypriot/rpi-busybox-httpd
+        state: started
+        ports:
+         - "80:80"
