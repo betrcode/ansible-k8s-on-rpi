@@ -1,0 +1,7 @@
+---
+
+- name: Ping
+  hosts: pajer
+
+  tasks:
+    - ping:
