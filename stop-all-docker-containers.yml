@@ -1,0 +1,14 @@
+---
+
+- name: Stop all Docker containers
+  hosts: all
+  become: yes
+  tasks:
+    - name: Get all container processes
+      shell: docker ps -q
+      changed_when: False
+      register: docker_ps
+
+    - name: Stop containers
+      shell: "docker stop {{ item }}"
+      with_items: " {{ docker_ps.stdout_lines }}"
