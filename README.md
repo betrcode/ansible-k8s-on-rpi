@@ -14,3 +14,5 @@ Installs Kubernetes on Raspberry Pi cluster using Ansible
 * Started out by using this as a guide: http://blog.kubernetes.io/2015/12/creating-raspberry-pi-cluster-running.html
 * Then found that the script to install Kubernetes wasn't quite working, so started looking at using `kubeadm` instead: http://kubernetes.io/docs/getting-started-guides/kubeadm/
 
+## Tools
+* https://etcher.io/ to flash SD cards
