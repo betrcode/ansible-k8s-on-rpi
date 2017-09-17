@@ -1,0 +1,13 @@
+---
+
+- name: Get hostnames
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Get hostname
+      command: hostname --fqdn
+      register: hostname_result
+
+    - debug:
+        var: hostname_result.stdout
