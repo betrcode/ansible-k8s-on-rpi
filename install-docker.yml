@@ -1,0 +1,7 @@
+---
+
+- name: Install Docker
+  hosts: pajer
+  become: yes
+  roles:
+    - betrcode.rpi.docker

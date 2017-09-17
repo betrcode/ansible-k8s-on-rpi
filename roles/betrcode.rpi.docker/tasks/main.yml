@@ -1,0 +1,12 @@
+---
+
+- name: Check if Docker is already installed
+  command: docker ps
+  become: yes
+  ignore_errors: yes
+  changed_when: False
+  register: docker_ps_result
+
+- name: Install Docker if needed
+  shell: curl -sSL https://get.docker.com | sh
+  when: docker_ps_result.rc != 0
