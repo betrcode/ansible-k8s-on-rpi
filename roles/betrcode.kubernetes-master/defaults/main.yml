@@ -1,2 +1,5 @@
 ---
 # defaults file for betrcode.kubernetes-master
+
+flannel_network_cidr: 10.244.0.0/16
+arch: arm

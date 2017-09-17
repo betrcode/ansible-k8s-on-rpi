@@ -1,9 +1,32 @@
 ---
 
 - name: Init k8s master
-  shell: "kubeadm init"
+  shell: "kubeadm init --pod-network-cidr {{ flannel_network_cidr }}"
   register: kubeadm_init_result
 
 - name: Output result
   debug:
     var: kubeadm_init_result
+
+- name: Copy flannel config
+  template:
+    src: kube-flannel.yml
+    dest: /tmp/kube-flannel.yml
+
+- name: Copy flannel rbac config
+  template:
+    src: kube-flannel-rbac.yml
+    dest: /tmp/kube-flannel-rbac.yml
+
+- name: Apply Flannel configs
+  shell: "kubectl apply -f {{ item }}"
+  with_items:
+    - /tmp/kube-flannel.yml
+    - /tmp/kube-flannel-rbac.yml
+
+- name: Get pods
+  shell: kubectl get pods --all-namespaces
+  register: pods_result
+
+- debug:
+    var: pods_result

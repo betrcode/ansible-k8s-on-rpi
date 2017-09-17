@@ -1,17 +1,7 @@
 localhost ansible_connection=local
 
-[pis:children]
-kubernetes-master
-nodes
-
-[kubernetes-master]
-pi1
-
-[nodes]
-pi2
-pi3
-pi4
-pi5
+[k8s-master]
+192.168.1.187
 
 [pajer]
 192.168.1.187
