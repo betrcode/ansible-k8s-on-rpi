@@ -2,15 +2,17 @@
 Installs Kubernetes on Raspberry Pi cluster using Ansible
 
 ## Prerequisites
-* Some Raspberry Pi's. (atleast 2) running Raspbian https://www.raspberrypi.org/downloads/raspbian/
-* SSH enabled in Raspbian (see below)
+* Some Raspberry Pi's. (atleast 2) running Hypriot OS: https://github.com/hypriot/image-builder-rpi/releases/download/v1.5.0/hypriotos-rpi-v1.5.0.img.zip
+* SSH enabled (see below)
 
 ### Enable SSH on a Raspberry Pi (Raspbian)
+Needed for Raspbian - not for Hypriot OS
 * put a file named `ssh` in `/boot`
 * Boot and login using `pi`/`raspberry`
 
 ## How to set password in environment
-`export ANSIBLE_SSH_PASS=raspberry`
+* For Hypriot OS: `export ANSIBLE_SSH_PASS=hypriot`
+* For Raspbian: `export ANSIBLE_SSH_PASS=raspberry`
 This environment variable is read from the `group_vars/all.yml`
 
 ## How to ping all pis
