@@ -8,24 +8,49 @@
   debug:
     var: kubeadm_init_result
 
+- shell: cp /etc/kubernetes/admin.conf $HOME/
+  become: yes
+  tags:
+    - post-init
+
+- shell: chown $(id -u):$(id -g) $HOME/admin.conf
+  become: yes
+  tags:
+    - post-init
+
+- shell: export KUBECONFIG=$HOME/admin.conf
+  become: yes
+  tags:
+    - post-init
+
 - name: Copy flannel config
   template:
     src: kube-flannel.yml
     dest: /tmp/kube-flannel.yml
+  become: yes
+  tags:
+    - flannel
 
 - name: Copy flannel rbac config
   template:
     src: kube-flannel-rbac.yml
     dest: /tmp/kube-flannel-rbac.yml
+  become: yes
+  tags:
+    - flannel
 
 - name: Apply Flannel configs
-  shell: "kubectl apply -f {{ item }}"
+  shell: "kubectl apply -f {{ item }} --kubeconfig $HOME/admin.conf"
+  become: yes
   with_items:
     - /tmp/kube-flannel.yml
     - /tmp/kube-flannel-rbac.yml
+  tags:
+    - flannel
 
 - name: Get pods
-  shell: kubectl get pods --all-namespaces
+  shell: kubectl get pods --all-namespaces --kubeconfig $HOME/admin.conf
+  become: yes
   register: pods_result
 
 - debug:
