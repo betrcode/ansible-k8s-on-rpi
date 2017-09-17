@@ -1,7 +1,7 @@
 ---
 
 - name: Shutdown
-  hosts: pis
+  hosts: pajer
   become: yes
 
   tasks:
