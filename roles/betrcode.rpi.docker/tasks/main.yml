@@ -10,3 +10,16 @@
 - name: Install Docker if needed
   shell: curl -sSL https://get.docker.com | sh
   when: docker_ps_result.rc != 0
+
+- name: Install needed packages
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - python-pip
+
+- name: Install pip modules
+  pip:
+    name: "{{ item }}"
+  with_items:
+    - docker-py
