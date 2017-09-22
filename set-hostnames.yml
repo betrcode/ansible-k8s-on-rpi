@@ -1,13 +1,13 @@
 ---
 
 - name: Set hostname
-  hosts: pis
+  hosts: all
   become: yes
 
   tasks:
     - name: Set hostname as defined in inventory
       hostname:
-        name: "{{ inventory_hostname }}"
+        name: "{{ myhostname }}"
     - name: Setup hosts file
       template:
         src: hosts
