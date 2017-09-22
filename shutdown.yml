@@ -9,3 +9,4 @@
       command: shutdown -h now
       async: 60 # let it run for max 60s
       poll: 0   # fire and forget
+      ignore_errors: True
