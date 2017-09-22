@@ -1,0 +1,15 @@
+---
+
+- name: Get MAC adresses
+  hosts: pajer
+  become: yes
+
+  tasks:
+    - set_fact:
+        mac_addresses: []
+
+    - set_fact:
+        my_mac: "{{ hostvars[inventory_hostname].ansible_default_ipv4.macaddress }}"
+
+    - debug:
+        var: my_mac
