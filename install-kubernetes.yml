@@ -11,3 +11,22 @@
   become: yes
   roles:
     - betrcode.kubernetes-master
+  tags:
+    - master
+
+# Requires k8s_token to be set
+- name: Join nodes to master
+  hosts: k8s-nodes
+  become: yes
+  tasks:
+    - set_fact:
+        k8s_token: "d4b21e.4ddf4b11d2375138" # TODO: Make dynamic
+    - name: Reset node
+      shell: "kubeadm reset"
+    - name: Join node to master
+      shell: "kubeadm join --token={{ k8s_token }} 192.168.99.117:6443" # TODO: Dynamic ip and port!
+      register: join_result
+    - debug:
+        var: join_result
+  tags:
+    - join

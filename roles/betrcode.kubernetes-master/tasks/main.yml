@@ -1,5 +1,13 @@
 ---
 
+- name: Reset k8s master
+  shell: "kubeadm reset"
+  register: kubeadm_reset_result
+
+- name: Output result
+  debug:
+    var: kubeadm_reset_result
+
 - name: Init k8s master
   shell: "kubeadm init --pod-network-cidr {{ flannel_network_cidr }}"
   register: kubeadm_init_result
@@ -18,24 +26,21 @@
   tags:
     - post-init
 
+# TODO: noop... remove
 - shell: export KUBECONFIG=$HOME/admin.conf
   become: yes
   tags:
     - post-init
+    - flannel
 
 - name: Copy flannel config
   template:
-    src: kube-flannel.yml
-    dest: /tmp/kube-flannel.yml
+    src: "{{ item }}"
+    dest: "/tmp/{{ item }}"
   become: yes
-  tags:
-    - flannel
-
-- name: Copy flannel rbac config
-  template:
-    src: kube-flannel-rbac.yml
-    dest: /tmp/kube-flannel-rbac.yml
-  become: yes
+  with_items:
+    - kube-flannel.yml
+    - kube-flannel-rbac.yml
   tags:
     - flannel
 
@@ -52,6 +57,10 @@
   shell: kubectl get pods --all-namespaces --kubeconfig $HOME/admin.conf
   become: yes
   register: pods_result
+  tags:
+    - flannel
 
 - debug:
     var: pods_result
+  tags:
+    - flannel

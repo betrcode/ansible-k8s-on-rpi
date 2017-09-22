@@ -1,10 +1,14 @@
 ---
 
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
 - name: Install tools
   apt:
     pkg: "{{ item }}"
     state: latest
-    update_cache: yes
+    update_cache: no
   with_items:
     - bridge-utils
 
