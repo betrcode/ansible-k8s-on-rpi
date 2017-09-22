@@ -5,7 +5,7 @@ k8s-master
 k8s-nodes
 
 [k8s-master]
-192.168.99.117 myhostname=black-pearl
+192.168.99.117 myhostname=kubeadm-master # Needed for certificate to be valid!
 
 [k8s-nodes]
 192.168.99.116 myhostname=black1
