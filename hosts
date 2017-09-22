@@ -1,11 +1,14 @@
 localhost ansible_connection=local
 
-[k8s-master]
-192.168.1.187
+[pajer:children]
+k8s-master
+k8s-nodes
 
-[pajer]
-192.168.1.187
-192.168.1.101
-192.168.1.208
-192.168.1.220
-192.168.1.199
+[k8s-master]
+192.168.99.117
+
+[k8s-nodes]
+192.168.99.116 myhostname=black1
+192.168.99.118 myhostname=black2
+192.168.99.119 myhostname=black3
+192.168.99.120 myhostname=black4
