@@ -30,3 +30,16 @@
         var: join_result
   tags:
     - join
+
+- name: Run some demo pods
+  hosts: k8s-master
+  become: yes
+  tasks:
+    - name: Copy deployment yaml
+      copy:
+        src: files/deployment.yml
+        dest: /tmp/
+    - name: Deploy pods
+      shell: "kubectl create -f /tmp/deployment.yml --kubeconfig $HOME/admin.conf"
+  tags:
+    - demo-pods
