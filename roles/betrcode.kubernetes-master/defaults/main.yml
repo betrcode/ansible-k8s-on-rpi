@@ -2,4 +2,5 @@
 # defaults file for betrcode.kubernetes-master
 
 flannel_network_cidr: 10.244.0.0/16
+kubeadm_token: d4b21e.4ddf4b11d2375138
 arch: arm

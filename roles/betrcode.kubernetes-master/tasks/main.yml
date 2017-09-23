@@ -9,7 +9,7 @@
     var: kubeadm_reset_result
 
 - name: Init k8s master
-  shell: "kubeadm init --pod-network-cidr {{ flannel_network_cidr }}"
+  shell: "kubeadm init --pod-network-cidr {{ flannel_network_cidr }} --token {{ kubeadm_token }} --token-ttl 0" # NEVER EXPIRE TOKEN!
   register: kubeadm_init_result
 
 - name: Output result
@@ -64,7 +64,7 @@
     - flannel
 
 - name: Get pods
-  shell: kubectl get pods --all-namespaces --kubeconfig $HOME/admin.conf
+  shell: kubectl get pods --all-namespaces --kubeconfig $HOME/admin.conf --output json
   become: yes
   register: pods_result
   tags:

@@ -35,3 +35,13 @@ This will check connectivity
 ## Control the k8s cluster from your local machine
 * Install kubectl: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 * Get the cluster admin.conf to your local machine: `ansible-playbook -i hosts install-kubernetes.yml --tags "copy-admin"`
+
+## Proxy API to localhost
+* `kubectl --kubeconfig ./fetched_files/192.168.99.117/root/admin.conf proxy --port 8080`
+
+## Visualize k8s cluster
+* Prerequisite: You have the API proxied to localhost:8080
+* See: https://github.com/brendandburns/gcp-live-k8s-visualizer 
+* `git clone https://github.com/brendandburns/gcp-live-k8s-visualizer.git`
+* `kubectl proxy --www=/home/max/work/gcp-live-k8s-visualizer/ --www-prefix=/my-mountpoint/ --api-prefix=/api/ --port=8001`
+* http://127.0.0.1:8001/my-mountpoint/

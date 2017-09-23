@@ -20,7 +20,8 @@
   become: yes
   tasks:
     - set_fact:
-        k8s_token: "d4b21e.4ddf4b11d2375138" # TODO: Make dynamic
+        # TODO: Make dynamic
+        k8s_token: d4b21e.4ddf4b11d2375138
     - name: Reset node
       shell: "kubeadm reset"
     - name: Join node to master
