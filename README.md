@@ -32,3 +32,6 @@ This will check connectivity
 ## Tools
 * https://etcher.io/ to flash SD cards
 
+## Control the k8s cluster from your local machine
+* Install kubectl: https://kubernetes.io/docs/tasks/tools/install-kubectl/
+* Get the cluster admin.conf to your local machine: `ansible-playbook -i hosts install-kubernetes.yml --tags "copy-admin"`

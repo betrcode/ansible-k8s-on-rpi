@@ -26,6 +26,16 @@
   tags:
     - post-init
 
+- name: Copy admin.conf to control host so we can run kubectl locally
+  fetch:
+    src: $HOME/admin.conf
+    dest: ./
+  become: yes
+  tags:
+    - post-init
+    - copy-admin
+
+
 # TODO: noop... remove
 - shell: export KUBECONFIG=$HOME/admin.conf
   become: yes
