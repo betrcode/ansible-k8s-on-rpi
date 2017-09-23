@@ -1,3 +1,4 @@
 .idea/
 ansible-k8s-on-rpi.iml
 *.retry
+fetched_files/
